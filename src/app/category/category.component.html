@@ -1,0 +1,12 @@
+<div class="my-container">
+
+    <div class="custom-select">
+        <!-- <button class="option" >🎸</button>
+        <button class="option selected" >🎉</button>
+        <button class="option" >🪭</button>
+        <button class="option" >🛍️</button> -->
+
+        <button *ngFor="let option of options" class="option" [ngClass]="{'selected': selectedOption === option}" (click)="selectOption(option)">{{ option }}</button>
+    </div>
+
+</div>

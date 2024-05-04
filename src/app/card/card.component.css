@@ -1,0 +1,9 @@
+.custom-card {
+    width: 15rem !important;
+}
+
+.my-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
