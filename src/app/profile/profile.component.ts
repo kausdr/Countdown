@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { SignupService } from '../signup/service/signup.service';
-import { Router } from '@angular/router';
+import { LoginService } from '../login/service/login.service';
+import { LoginDataService } from '../login/service/login-data.service';
+import { LoginModel } from '../login/model/login.model';
 
 @Component({
   selector: 'app-profile',
@@ -8,5 +9,22 @@ import { Router } from '@angular/router';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+
+  loginData: LoginModel | null;
+
+  constructor(private loginService: LoginService, private loginDataService: LoginDataService) {
+
+    this.loginData = this.loginDataService.getLoginData();
+
+   }
+   
+
+   delete(): void {
+    if (this.loginData) {
+      this.loginService.deleteAccount(this.loginData).subscribe(retorno => {
+        console.log(retorno);
+      });
+    }
+  }
 
 }

@@ -4,6 +4,7 @@ import { LoginModel } from './model/login.model';
 import { Form, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../shared/authguard.guard';
+import { LoginDataService } from './service/login-data.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class LoginComponent {
     password: new FormControl("", [Validators.required])
   })
 
-  constructor(private loginService: LoginService, private router: Router, private authGuard: AuthGuard) { }
+  constructor(private loginService: LoginService, private router: Router, private authGuard: AuthGuard, private loginDataService: LoginDataService) { }
 
 
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class LoginComponent {
 
     this.loginService.checkLoginExists(login).subscribe((exists: boolean) => {
       if (exists) {
+        this.loginDataService.setLoginData(login);
         this.showSuccessMessages = true
         this.authGuard.login();
         console.log('O email existe no banco de dados.');

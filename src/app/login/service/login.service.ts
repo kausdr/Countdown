@@ -20,4 +20,24 @@ export class LoginService {
       });
     });
   }
+
+  deleteAccount(search: LoginModel) {
+    return new Observable<any>((observer) => {
+      this.db.list('signup', ref => ref.orderByChild('email').equalTo(search.email!)).snapshotChanges().subscribe((changes: any[]) => {
+        changes.forEach(change => {
+          const key = change.payload.key;
+          console.log(key); // Verifica a chave
+          this.db.object(`signup/${key}`).remove()
+            .then(() => {
+              observer.next(true);
+              observer.complete();
+            })
+            .catch((error: any) => {
+              console.error('Erro ao excluir:', error);
+              observer.error(error);
+            });
+        });
+      });
+    });
+  }
 }
