@@ -9,6 +9,8 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 import { ContentComponent } from './content/content.component';
 import { AuthGuard } from './shared/authguard.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
+
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
@@ -18,7 +20,8 @@ const routes: Routes = [
   {path: "createEvent", component: CreateEventComponent},
   {path: "createCategory", component: CreateCategoryComponent},
   {path: "content", component: ContentComponent, canActivate: [AuthGuard]},
-  {path: "profile", component: ProfileComponent}
+  {path: "profile", component: ProfileComponent},
+  {path: "editAccount", component: EditAccountComponent}
   
   
 ];

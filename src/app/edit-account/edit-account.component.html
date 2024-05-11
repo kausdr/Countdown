@@ -1,0 +1,51 @@
+<div *ngIf="showSuccessMessages" class="alert alert-success" role="alert">
+    Information edited!
+  </div>
+  <div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
+    Something went wrong!
+  </div>
+  
+  
+  <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+  
+          
+          <div class="card login-div">
+            <div class="card-body">
+              <h5 class="card-title text-center">Edit Informations</h5>
+              <form [formGroup]="signupForm"  class="login-form">
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" formControlName="username">
+                  </div>
+                  <div class="invalid-feedback" [style.display]="signupForm.controls.username.invalid 
+        && signupForm.controls.username.touched ? 'block' : 'none'">
+                Please fill out this field!</div>
+    
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" placeholder="Enter email" formControlName="email">
+                  </div>
+                  <div class="invalid-feedback" [style.display]="signupForm.controls.email.invalid 
+        && signupForm.controls.email.touched ? 'block' : 'none'">
+                Please fill out this field!</div>
+    
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
+                </div>
+                <div class="invalid-feedback" [style.display]="signupForm.controls.password.invalid 
+        && signupForm.controls.password.touched ? 'block' : 'none'">
+                Please fill out this field!</div>
+    
+
+                <button (click)="edit()" class="btn btn-primary btn-block">Confirm</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  

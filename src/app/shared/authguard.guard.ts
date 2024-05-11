@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
 
   private isAuthenticated = false;
   loggedIn = new EventEmitter<boolean>();
+  editting = new EventEmitter<boolean>();
 
   canActivate(): boolean {
     if (this.isLoggedIn()) {
@@ -22,6 +23,12 @@ export class AuthGuard implements CanActivate {
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;
+  }
+
+  edit(): void {
+    this.isAuthenticated = true;
+    this.editting.emit(true);
+    this.router.navigate(['/editAccount']);
   }
 
   login(): void {

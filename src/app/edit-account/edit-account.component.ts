@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
-import { SignupService } from './service/signup.service';
-import { SignupModel } from './model/signup.model';
+import { SignupService } from '../signup/service/signup.service';
+import { SignupModel } from '../signup/model/signup.model';
 import { Form, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
-
+import { LoginDataService } from '../login/service/login-data.service';
+import { LoginModel } from '../login/model/login.model';
+import { LoginService } from '../login/service/login.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  selector: 'app-edit-account',
+  templateUrl: './edit-account.component.html',
+  styleUrl: './edit-account.component.css'
 })
-export class SignupComponent {
+export class EditAccountComponent {
+
+  loginData: LoginModel | null;
 
   showSuccessMessages = false;
   showErrorMessages = false;
@@ -24,8 +28,8 @@ export class SignupComponent {
     password: new FormControl("", [Validators.required])
   })
 
-  constructor(private signupService: SignupService, private router: ActivatedRoute) { 
-
+  constructor(private loginService: LoginService, private signupService: SignupService, private router: ActivatedRoute, private loginDataService: LoginDataService,) {
+    this.loginData = this.loginDataService.getLoginData();
   }
 
   ngOnInit(): void {
@@ -39,7 +43,7 @@ export class SignupComponent {
     })
   }
 
-  signup(): void {
+  edit(): void {
     if (this.signupForm.invalid) {
       console.log('Formulário inválido');
       this.signupForm.markAllAsTouched();
@@ -56,13 +60,17 @@ export class SignupComponent {
       signup.email = this.signupForm.controls.email.value?.toString();
       signup.password = this.signupForm.controls.password.value?.toString();
 
-      this.signupService.saveSignup(signup).then(result => {
-        this.showSuccessMessages = true;
-        console.log(result);
-      });
+      if (this.loginData) {
+
+        this.loginService.editAccount(this.loginData, signup).subscribe(retorno => {
+          this.showSuccessMessages = true;
+          console.log(retorno);
+        });
+      }
     }
   }
 }
+
 
 
 

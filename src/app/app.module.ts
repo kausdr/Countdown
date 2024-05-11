@@ -16,6 +16,8 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { ContentComponent } from './content/content.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { ProfileComponent } from './profile/profile.component';
     CreateEventComponent,
     CreateCategoryComponent,
     ContentComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,
