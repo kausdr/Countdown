@@ -3,6 +3,7 @@ import { LoginModel } from '../model/login.model';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { SignupModel } from '../../signup/model/signup.model';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,23 +45,46 @@ export class LoginService {
 
 
 
+  // deleteAccount(search: LoginModel) {
+  //   return new Observable<any>((observer) => {
+  //     this.db.list('signup', ref => ref.orderByChild('email').equalTo(search.email!)).snapshotChanges().subscribe((changes: any[]) => {
+  //       changes.forEach(change => {
+  //         const key = change.payload.key;
+  //         console.log(key); // Verifica a chave
+  //         this.db.object(`signup/${key}`).remove()
+  //           .then(() => {
+  //             observer.next(true);
+  //             observer.complete();
+  //           })
+  //           .catch((error: any) => {
+  //             console.error('Erro ao excluir:', error);
+  //             observer.error(error);
+  //           });
+  //       });
+  //     });
+  //   });
+  // }
+
   deleteAccount(search: LoginModel) {
     return new Observable<any>((observer) => {
-      this.db.list('signup', ref => ref.orderByChild('email').equalTo(search.email!)).snapshotChanges().subscribe((changes: any[]) => {
-        changes.forEach(change => {
-          const key = change.payload.key;
-          console.log(key); // Verifica a chave
-          this.db.object(`signup/${key}`).remove()
-            .then(() => {
-              observer.next(true);
-              observer.complete();
-            })
-            .catch((error: any) => {
-              console.error('Erro ao excluir:', error);
-              observer.error(error);
-            });
+      this.db.list('signup', ref => ref.orderByChild('email').equalTo(search.email!)).snapshotChanges()
+        .pipe(take(1))  // Adiciona o operador take(1) para garantir que a assinatura completa após a primeira emissão
+        .subscribe((changes: any[]) => {
+          changes.forEach(change => {
+            const key = change.payload.key;
+            console.log(key); // Verifica a chave
+            this.db.object(`signup/${key}`).remove()
+              .then(() => {
+                observer.next(true);
+                observer.complete();
+              })
+              .catch((error: any) => {
+                console.error('Erro ao excluir:', error);
+                observer.error(error);
+              });
+          });
         });
-      });
     });
   }
+  
 }
