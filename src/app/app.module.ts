@@ -17,6 +17,9 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 import { ContentComponent } from './content/content.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AuthService } from './shared/services/auth.service';
 
 
 
@@ -39,11 +42,18 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireDatabaseModule
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    AuthService
+    
   ],
   bootstrap: [AppComponent]
 })

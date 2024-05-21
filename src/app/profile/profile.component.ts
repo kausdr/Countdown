@@ -35,6 +35,8 @@ export class ProfileComponent {
       this.loginService.deleteAccount(this.loginData).subscribe(retorno => {
         console.log(retorno);
       });
+
+      this.authGuard.logout();
     }
   }
 

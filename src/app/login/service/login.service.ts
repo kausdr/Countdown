@@ -1,15 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { LoginModel } from '../model/login.model';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { SignupModel } from '../../signup/model/signup.model';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
+import { GoogleAuthProvider } from 'firebase/auth';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+
 export class LoginService {
 
   constructor(private db: AngularFireDatabase) { }
+
+
 
   checkLoginExists(login: LoginModel) : Observable<boolean>{
     return new Observable<boolean>((observer) => {
@@ -20,6 +29,8 @@ export class LoginService {
       });
     });
   }
+
+
 
 
   editAccount(login: LoginModel ,signup: SignupModel): Observable<boolean> {
@@ -48,7 +59,7 @@ export class LoginService {
     return new Observable<any>((observer) => {
       this.db.list('signup', ref => ref.orderByChild('email').equalTo(search.email!)).snapshotChanges().subscribe((changes: any[]) => {
         changes.forEach(change => {
-          const key = change.payload.key;
+          let key = change.payload.key;
           console.log(key); // Verifica a chave
           this.db.object(`signup/${key}`).remove()
             .then(() => {
