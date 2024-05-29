@@ -29,4 +29,7 @@ app-category {
     margin-bottom: 20px;
 }
 
+.selected {
+    background-color: green;
+}
 

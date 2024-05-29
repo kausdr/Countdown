@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ContentComponent {
 
+  selected = false;
+
+  addClass() {
+    this.selected = !this.selected;
+  }
+
 }

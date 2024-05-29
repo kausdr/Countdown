@@ -6,6 +6,12 @@
       <div class="account-links">
         <button  class="create-btn btn btn-primary" routerLink="/createEvent">+</button>
       </div>
+
+      <div class="account-links">
+        <button  class="create-btn btn btn-primary" [ngClass]="{'selected': selected}" (click)="addClass()"><i class="fa-solid fa-pen-to-square"></i></button>
+        
+      </div>
+      
     </div>
 
     <div class="category-card">

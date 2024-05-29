@@ -16,6 +16,7 @@ export class CreateEventComponent {
 
   showSuccessMessages = false;
   showErrorMessages = false;
+  daysLeft: number = 0
 
 
   key?: string;
@@ -35,6 +36,7 @@ export class CreateEventComponent {
         this.eventService.carregar(this.key).subscribe(event => {
           this.formGroup.controls.nome.patchValue(event.nome);
           this.formGroup.controls.date.patchValue(event.date);
+          this.calculateDaysLeft(event.date);
         });
       }
     })
@@ -52,6 +54,9 @@ export class CreateEventComponent {
     event.nome = this.formGroup.controls.nome.value?.toString();
     event.date = this.formGroup.controls.date?.value?.toString();
 
+    this.calculateDaysLeft(event.date);
+    event.dias = this.daysLeft;
+
     if (this.key) {
       //codigo para alterar o produto
     } else {
@@ -64,6 +69,20 @@ export class CreateEventComponent {
 
       this.authGuard.login();
     }
+  }
+
+  calculateDaysLeft(eventDate: string | undefined): void {
+    if (!eventDate) {
+      this.daysLeft = 0;
+      return;
+    }
+
+    const currentDate = new Date();
+    const eventDateObj = new Date(eventDate);
+
+    const differenceInTime = eventDateObj.getTime() - currentDate.getTime();
+
+    this.daysLeft = Math.ceil(differenceInTime / (1000 * 3600 * 24));
   }
 
 }

@@ -17,6 +17,7 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 import { ContentComponent } from './content/content.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { MaterialIcon } from 'material-icons';
 
 
 

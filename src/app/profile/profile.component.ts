@@ -36,6 +36,8 @@ export class ProfileComponent {
         console.log(retorno);
       });
     }
+
+    this.authGuard.logout();
   }
 
 }
