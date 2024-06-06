@@ -25,11 +25,11 @@
     gap: 10px;
 }
 
-app-category {
+.app-category {
     margin-bottom: 20px;
 }
 
 .selected {
-    background-color: green;
+    background-color: rgb(255, 166, 0);
 }
 

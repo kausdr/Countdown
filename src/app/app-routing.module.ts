@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: "card", component: CardComponent},
   {path: "category", component: CategoryComponent},
   {path: "createEvent", component: CreateEventComponent},
+  { path: 'createEvent/:key', component: CreateEventComponent },
   {path: "createCategory", component: CreateCategoryComponent},
   {path: "content", component: ContentComponent, canActivate: [AuthGuard]},
   {path: "profile", component: ProfileComponent},

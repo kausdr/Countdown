@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../create-event/service/event.service';
+import { ContentComponent } from '../content/content.component';
 
 @Component({
   selector: 'app-card',
@@ -10,9 +11,14 @@ import { EventService } from '../create-event/service/event.service';
 export class CardComponent implements OnInit {
 
   public events: any;
+  editEnabled: boolean = false;
 
   constructor(private eventService: EventService,
-    private router: Router) { }
+    private router: Router, private contentComponent: ContentComponent) { 
+      this.contentComponent.canEdit.subscribe((status: boolean) => {
+        this.editEnabled = status;
+      });
+    }
 
     ngOnInit(): void {
       this.eventService.listar().subscribe(events => {
@@ -20,6 +26,8 @@ export class CardComponent implements OnInit {
         this.events = events;
       });
     }
+
+    
 
 
     excluir(key: any) {
@@ -29,9 +37,18 @@ export class CardComponent implements OnInit {
       });
     }
 
-
     editar(key: any) {
-      this.router.navigate(['/layout/produto/'+key]);
+      if (this.editEnabled) {
+        console.log("editado");
+        this.router.navigate(['/createEvent/'+key]);
+      }
+
+      
     }
+
+
+    // editar(key: any) {
+    //   this.router.navigate(['/layout/produto/'+key]);
+    // }
 
 }

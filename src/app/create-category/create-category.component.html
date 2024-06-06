@@ -1,4 +1,9 @@
-
+<div *ngIf="showSuccessMessages" class="alert alert-success" role="alert">
+  Produto cadastrado com sucesso!
+</div>
+<div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
+  Erro ao cadastrar produto!
+</div>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -8,18 +13,16 @@
         <div class="card login-div">
           <div class="card-body">
             <h5 class="card-title text-center">Create Category</h5>
-            <form class="login-form">
+            <form class="login-form" [formGroup]="formGroup">
               <div class="form-group">
                 <label for="title">Category name</label>
-                <input type="text" class="form-control" id="title" placeholder="Type the category name">
+                <input type="text" class="form-control" id="title" placeholder="Type the category name" formControlName="nome">
               </div>
+
               <div class="my-container">
                 <label for="icon">Choose an icon</label>
                 <div class="custom-select" id="icon">
-                    <button class="option" >🎸</button>
-                    <button class="option selected" >🎉</button>
-                    <button class="option" >🪭</button>
-                    <button class="option" >🛍️</button>
+                  <button *ngFor="let option of options" class="option" [ngClass]="{'selected': selectedOption === option}"  (click)="selectOption(option)">{{ option }}</button>
 
                 </div>
             
@@ -27,8 +30,8 @@
             </form>
 
             <div class="btn-container">
-              <button  class="btn btn-danger" routerLink="/content">Cancel</button>
-              <button class="btn btn-primary" routerLink="/content" type="submit">Save</button>
+              <button  class="btn btn-secondary" routerLink="/content">Cancel</button>
+              <button class="btn btn-primary" (click)="salvar()"  type="submit">Save</button>
         </div>
         </div>
 

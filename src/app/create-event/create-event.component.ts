@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { EventService } from './service/event.service';
 import { LoginDataService } from '../login/service/login-data.service';
 import { LoginModel } from '../login/model/login.model';
 import { EventModel } from './model/event.model';
 import { AuthGuard } from '../shared/authguard.guard';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs'; 
 
 @Component({
   selector: 'app-create-event',
@@ -20,14 +22,19 @@ export class CreateEventComponent {
 
 
   key?: string;
+  paramKey: string | null = null;
+
   formGroup = new FormGroup({
     nome: new FormControl("", [Validators.required]),
     date: new FormControl("", [Validators.required])
   })
+  
 
-  constructor(private eventService: EventService, private router: ActivatedRoute, private routerN: Router, private authGuard: AuthGuard) { 
+  constructor(private eventService: EventService, private router: ActivatedRoute, private routerN: Router, private authGuard: AuthGuard, private route: ActivatedRoute) { 
 
   }
+
+  isEditMode: boolean = false;
 
   ngOnInit(): void {
     this.router.paramMap.subscribe(paramMap => {
@@ -40,6 +47,17 @@ export class CreateEventComponent {
         });
       }
     })
+
+
+    this.checkUrl()
+    
+
+    
+  }
+
+  checkUrl() {
+    this.paramKey = this.route.snapshot.paramMap.get('key')
+    this.isEditMode = this.paramKey != null
   }
 
   salvar(): void {
@@ -59,6 +77,10 @@ export class CreateEventComponent {
 
     if (this.key) {
       //codigo para alterar o produto
+      this.eventService.alterar(this.key, event).then(result => {
+        this.showSuccessMessages = true;
+        console.log(result);
+      });
     } else {
       //codigo para salvar o produto
       this.eventService.salvar(event).then(result => {
@@ -67,8 +89,17 @@ export class CreateEventComponent {
         
       });
 
-      this.authGuard.login();
+      this.authGuard.home();
     }
+  }
+
+  excluir(key: any) {
+    console.log(key);
+    this.eventService.excluir(key).then(retorno => {
+      console.log(retorno);
+    });
+
+    this.authGuard.home();
   }
 
   calculateDaysLeft(eventDate: string | undefined): void {

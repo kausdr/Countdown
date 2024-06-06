@@ -1,7 +1,7 @@
 <div class="my-container">
 
 
-    <div *ngFor="let event of events;" class="card custom-card" style="width: 18rem;">
+    <div *ngFor="let event of events;" class="card custom-card" [ngClass]="{'outline': editEnabled}" style="width: 18rem;" (click)="editar(event.key)">
         <div class="card-body">
             <h5 class="card-title">{{event.nome}}</h5>
 

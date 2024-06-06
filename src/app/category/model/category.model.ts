@@ -1,4 +1,4 @@
 export class CategoryModel {
-    name?: String;
     icon?: String;
+    nome?: String;
 }

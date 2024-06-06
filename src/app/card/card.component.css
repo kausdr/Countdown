@@ -7,3 +7,10 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+
+
+.outline {
+    outline: 2px solid rgb(255, 166, 0);
+    cursor: pointer;
+    transition: 0.2s;
+}

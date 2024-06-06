@@ -1,12 +1,9 @@
-<div class="my-container">
+<div class="my-container" >
 
-    <div class="custom-select">
-        <!-- <button class="option" >🎸</button>
-        <button class="option selected" >🎉</button>
-        <button class="option" >🪭</button>
-        <button class="option" >🛍️</button> -->
+    <div *ngFor="let category of categories;" class="custom-select" [ngClass]="{'selected': isSelected(category),'outline': editEnabled}" (click)="selectCategory(category); editar()">
 
-        <button *ngFor="let option of options" class="option" [ngClass]="{'selected': selectedOption === option}" (click)="selectOption(option)">{{ option }}</button>
+        <p class="nome" >{{ category.nome }}</p>
+        <div class="icon">{{ category.icon }}</div>
     </div>
 
 </div>
