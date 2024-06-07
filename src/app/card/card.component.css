@@ -1,5 +1,6 @@
 .custom-card {
     width: 15rem !important;
+    transition: 0.2s;
 }
 
 .my-container {
@@ -10,7 +11,8 @@
 
 
 .outline {
-    outline: 2px solid rgb(255, 166, 0);
+    box-shadow: 0 0 0 2px rgb(0, 157, 255);
+    /* border: 2px solid rgb(193, 193, 193); */
     cursor: pointer;
-    transition: 0.2s;
+    
 }

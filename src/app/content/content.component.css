@@ -31,5 +31,6 @@
 
 .selected {
     background-color: rgb(255, 166, 0);
+    border-color: rgb(255, 166, 0);
 }
 

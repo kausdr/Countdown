@@ -31,7 +31,6 @@ export class CreateCategoryComponent {
 
   showSuccessMessages = false;
   showErrorMessages = false;
-  daysLeft: number = 0
 
 
   key?: string;
@@ -54,6 +53,7 @@ export class CreateCategoryComponent {
       if (this.key) {
         this.categoryService.carregar(this.key).subscribe(category => {
           this.formGroup.controls.nome.patchValue(category.nome);
+          this.selectedOption = category.icon;
         });
       }
     })
@@ -76,8 +76,6 @@ export class CreateCategoryComponent {
       this.showErrorMessages = true;
       return;
     }
-
-      console.log("SALVOUU")
 
       var category = new CategoryModel();
       category.icon = this.selectedOption

@@ -13,7 +13,14 @@
 
       <div class="card login-div">
         <div class="card-body">
-          <div [ngClass]="{'bar': isEditMode}" ><h5 class="card-title text-center">Create Event</h5> <button class="btn btn-danger deleteBtn" (click)="excluir(paramKey)" *ngIf="isEditMode"><i class="fa-solid fa-trash"></i></button> </div>
+          <div [ngClass]="{'bar': isEditMode}" >
+
+            <h5 class="card-title text-center">Create Event</h5> 
+            <button class="btn btn-danger deleteBtn" (click)="excluir(paramKey)" *ngIf="isEditMode">
+              <i class="fa-solid fa-trash"></i>
+            </button> 
+            
+          </div>
           <form class="login-form" [formGroup]="formGroup">
             <div class="form-group">
               <label for="username">Event name</label>

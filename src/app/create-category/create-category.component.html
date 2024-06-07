@@ -6,36 +6,49 @@
 </div>
 
 <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
 
-        
-        <div class="card login-div">
-          <div class="card-body">
+
+      <div class="card login-div" >
+        <div class="card-body">
+
+          <div [ngClass]="{'bar': isEditMode}">
             <h5 class="card-title text-center">Create Category</h5>
-            <form class="login-form" [formGroup]="formGroup">
-              <div class="form-group">
-                <label for="title">Category name</label>
-                <input type="text" class="form-control" id="title" placeholder="Type the category name" formControlName="nome">
-              </div>
+            <button class="btn btn-danger deleteBtn" (click)="excluir(paramKey)" *ngIf="isEditMode">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
 
-              <div class="my-container">
-                <label for="icon">Choose an icon</label>
-                <div class="custom-select" id="icon">
-                  <button *ngFor="let option of options" class="option" [ngClass]="{'selected': selectedOption === option}"  (click)="selectOption(option)">{{ option }}</button>
-
-                </div>
-            
-            </div>
-            </form>
-
-            <div class="btn-container">
-              <button  class="btn btn-secondary" routerLink="/content">Cancel</button>
-              <button class="btn btn-primary" (click)="salvar()"  type="submit">Save</button>
-        </div>
         </div>
 
+        <form class="login-form" [formGroup]="formGroup">
+          <div class="form-group">
+            <label for="title">Category name</label>
+            <input type="text" class="form-control" id="title" placeholder="Type the category name"
+              formControlName="nome">
+          </div>
 
+        </form>
+
+        <div class="my-container">
+          <label for="icon">Choose an icon</label>
+          <div class="custom-select" id="icon">
+            <button *ngFor="let option of options" class="option" [ngClass]="{'selected': selectedOption === option}"
+              (click)="selectOption(option)">{{ option
+              }}</button>
+
+          </div>
+
+        </div>
+
+        <div class="btn-container">
+          <button class="btn btn-secondary" routerLink="/content">Cancel</button>
+          <button class="btn btn-primary" (click)="salvar()" type="submit">Save</button>
+        </div>
       </div>
+
+
     </div>
   </div>
+</div>

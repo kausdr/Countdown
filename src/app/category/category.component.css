@@ -14,6 +14,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: 0.2s;
 }
 
 .nome{
@@ -40,7 +41,8 @@
 }
 
 .outline {
-    outline: 2px solid rgb(255, 166, 0);
+    box-shadow: 0 0 0 2px rgb(0, 157, 255);;
+    /* border: 2px solid rgb(193, 193, 193); */
     cursor: pointer;
-    transition: 0.2s;
+    
 }

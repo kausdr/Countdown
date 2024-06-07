@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: "createEvent", component: CreateEventComponent},
   { path: 'createEvent/:key', component: CreateEventComponent },
   {path: "createCategory", component: CreateCategoryComponent},
+  {path: "createCategory/:key", component: CreateCategoryComponent},
   {path: "content", component: ContentComponent, canActivate: [AuthGuard]},
   {path: "profile", component: ProfileComponent},
   {path: "editAccount", component: EditAccountComponent}

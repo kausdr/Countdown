@@ -16,15 +16,15 @@ export class CategoryService {
   }
 
   excluir(key: any) {
-    return this.db.object('event/'+key).remove();
+    return this.db.object('category/'+key).remove();
   }
 
   carregar(key: any) : Observable<any> {
-    return this.db.object('event/'+key).valueChanges();
+    return this.db.object('category/'+key).valueChanges();
   }
 
   alterar(key: any, produto: CategoryModel) {
-    return this.db.object('event/'+key).update(produto);
+    return this.db.object('category/'+key).update(produto);
   }
 
   listar() {

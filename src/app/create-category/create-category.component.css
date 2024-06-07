@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 
@@ -14,10 +15,16 @@
 
 }
 
+
+
 .card-body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.card {
+    padding: 20px;
 }
 
 .login-form {
@@ -31,6 +38,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .option {
@@ -43,4 +51,14 @@
 
 .selected {
     background-color: green;
+}
+
+.bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.deleteBtn {
+    font-size: 0.7em;
 }

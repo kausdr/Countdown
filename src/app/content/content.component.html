@@ -8,7 +8,7 @@
       </div>
 
       <div class="account-links">
-        <button  class="create-btn btn btn-primary" [ngClass]="{'selected': selected}" (click)="addClass()"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button  class="create-btn btn btn-primary" [ngClass]="{'selected': selected}" (click)="toggleEditMode()"><i class="fa-solid fa-pen-to-square"></i></button>
         
       </div>
       
@@ -24,7 +24,6 @@
 
     
     <app-category></app-category>
-        <!-- <router-outlet class="my-router-outlet"></router-outlet> -->
         <div class="event-space">
             <app-card></app-card>
         </div>

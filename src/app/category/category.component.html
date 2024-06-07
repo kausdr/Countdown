@@ -1,6 +1,6 @@
 <div class="my-container" >
 
-    <div *ngFor="let category of categories;" class="custom-select" [ngClass]="{'selected': isSelected(category),'outline': editEnabled}" (click)="selectCategory(category); editar()">
+    <div *ngFor="let category of categories;" class="custom-select" [ngClass]="{'selected': isSelected(category),'outline': editEnabled}" (click)="selectCategory(category); editar(category.key)">
 
         <p class="nome" >{{ category.nome }}</p>
         <div class="icon">{{ category.icon }}</div>
