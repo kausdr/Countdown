@@ -4,6 +4,7 @@ import { EditModeService } from './service/edit-mode.service';
 import { take } from 'rxjs/operators';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CategoryService } from '../create-category/service/category.service';
 
 @Component({
   selector: 'app-content',
@@ -12,11 +13,12 @@ import { Subject } from 'rxjs';
 })
 export class ContentComponent {
 
-  constructor(private editModeService: EditModeService) { }
+  constructor(private editModeService: EditModeService, private categoryService: CategoryService) { }
 
   selected = false;
   canEdit = new EventEmitter<boolean>();
   private destroy$ = new Subject<void>();
+  selectedCategoryId: string | null = null;
 
   ngOnInit(): void {
     this.editModeService.getEditEnabled().pipe(
@@ -46,7 +48,7 @@ export class ContentComponent {
     this.canEdit.emit(this.selected);
     console.log("remover classe ()")
   }
-  
+
 
   toggleEditMode(): void {
     this.editModeService.getEditEnabled().pipe(
@@ -57,5 +59,9 @@ export class ContentComponent {
 
     });
 
-}
+  }
+
+  repassCategorySelection(categoryId: string): void {
+    this.selectedCategoryId = categoryId;
+  }
 }

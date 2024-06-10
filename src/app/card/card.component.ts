@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../create-event/service/event.service';
 import { ContentComponent } from '../content/content.component';
@@ -8,8 +8,9 @@ import { ContentComponent } from '../content/content.component';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
-export class CardComponent implements OnInit {
+export class CardComponent{
 
+  @Input() selectedCategoryId: string | null = null;
   public events: any;
   editEnabled: boolean = false;
 
@@ -20,15 +21,25 @@ export class CardComponent implements OnInit {
       });
     }
 
-    ngOnInit(): void {
-      this.eventService.listar().subscribe(events => {
-        console.log(events)
-        this.events = events;
-      });
+    // ngOnInit(): void {
+    //   this.eventService.listar().subscribe(events => {
+    //     console.log(events)
+    //     this.events = events;
+    //   });
+    // }
+
+    ngOnChanges(): void {
+      if (this.selectedCategoryId !== null) {
+        this.eventService.listarPorCategoria(this.selectedCategoryId).subscribe(events => {
+          this.events = events;
+        });
+      } else {
+        // Se selectedCategoryId for null, exibir todos os eventos
+        this.eventService.listar().subscribe(events => {
+          this.events = events;
+        });
+      }
     }
-
-    
-
 
     excluir(key: any) {
       console.log(key);

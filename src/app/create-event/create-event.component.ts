@@ -8,6 +8,7 @@ import { EventModel } from './model/event.model';
 import { AuthGuard } from '../shared/authguard.guard';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs'; 
+import { CategoryService } from '../create-category/service/category.service';
 
 @Component({
   selector: 'app-create-event',
@@ -19,6 +20,8 @@ export class CreateEventComponent {
   showSuccessMessages = false;
   showErrorMessages = false;
   daysLeft: number = 0
+  categories: any[] = [];
+  selectedCategory: any | null = null;
 
 
   key?: string;
@@ -30,7 +33,7 @@ export class CreateEventComponent {
   })
   
 
-  constructor(private eventService: EventService, private router: ActivatedRoute, private routerN: Router, private authGuard: AuthGuard, private route: ActivatedRoute) { 
+  constructor(private eventService: EventService, private router: ActivatedRoute, private routerN: Router, private authGuard: AuthGuard, private route: ActivatedRoute, private categoryService: CategoryService,) { 
 
   }
 
@@ -43,11 +46,15 @@ export class CreateEventComponent {
         this.eventService.carregar(this.key).subscribe(event => {
           this.formGroup.controls.nome.patchValue(event.nome);
           this.formGroup.controls.date.patchValue(event.date);
+          this.selectedCategory = event.category;
           this.calculateDaysLeft(event.date);
         });
       }
     })
 
+    this.categoryService.listar().subscribe(categories => {
+      this.categories = categories;
+    });
 
     this.checkUrl()
     
@@ -71,26 +78,31 @@ export class CreateEventComponent {
     var event = new EventModel();
     event.nome = this.formGroup.controls.nome.value?.toString();
     event.date = this.formGroup.controls.date?.value?.toString();
+    event.category = this.selectedCategory;
 
     this.calculateDaysLeft(event.date);
     event.dias = this.daysLeft;
 
     if (this.key) {
-      //codigo para alterar o produto
       this.eventService.alterar(this.key, event).then(result => {
         this.showSuccessMessages = true;
         console.log(result);
       });
     } else {
-      //codigo para salvar o produto
       this.eventService.salvar(event).then(result => {
         this.showSuccessMessages = true;
         console.log(result);
-        
+    
       });
 
       this.authGuard.home();
     }
+  }
+
+  selectCategory(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const selectedCategory = target.value;
+    this.selectedCategory = this.categories.find(category => category.key === selectedCategory);
   }
 
   excluir(key: any) {

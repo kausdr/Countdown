@@ -1,31 +1,31 @@
     
     <div class="container-fluid">
-    <div class="title-card">
-      <h2>Meus eventos</h2>
-
-      <div class="account-links">
-        <button  class="create-btn btn btn-primary" routerLink="/createEvent">+</button>
-      </div>
-
-      <div class="account-links">
-        <button  class="create-btn btn btn-primary" [ngClass]="{'selected': selected}" (click)="toggleEditMode()"><i class="fa-solid fa-pen-to-square"></i></button>
+      <div class="title-card">
+        <h2>Meus eventos</h2>
+  
+        <div class="account-links">
+          <button  class="create-btn btn btn-primary" routerLink="/createEvent">+</button>
+        </div>
+  
+        <div class="account-links">
+          <button  class="create-btn btn btn-primary" [ngClass]="{'selected': selected}" (click)="toggleEditMode()"><i class="fa-solid fa-pen-to-square"></i></button>
+          
+        </div>
         
       </div>
-      
-    </div>
-
-    <div class="category-card">
-      <h4>Categorias</h4>
-      <div class="account-links">
-        <button  class="create-btn btn btn-primary" routerLink="/createCategory">+</button>
-      </div>
-    </div>
-
-
-    
-    <app-category></app-category>
-        <div class="event-space">
-            <app-card></app-card>
+  
+      <div class="category-card">
+        <h4>Categorias</h4>
+        <div class="account-links">
+          <button  class="create-btn btn btn-primary" routerLink="/createCategory">+</button>
         </div>
-
-    </div>
+      </div>
+  
+  
+      
+      <app-category (categorySelected)="repassCategorySelection($event)"></app-category>
+          <div class="event-space">
+            <app-card [selectedCategoryId]="selectedCategoryId"></app-card>
+          </div>
+  
+      </div>

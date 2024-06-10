@@ -35,7 +35,13 @@
             <div class="form-group">
               <input type="date" class="form-control" id="date" formControlName="date">
             </div>
+
+            <label for="category">Category</label>
+              <select class="form-control" formControlName="category" (change)="selectCategory($event)">
+                <option *ngFor="let category of categories" [value]="category.key">{{ category.nome }}</option>
+              </select>
           </form>
+          
 
         <div class="btn-container">
           <button class="btn btn-secondary" routerLink="/content">Cancel</button>

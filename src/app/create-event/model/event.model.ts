@@ -1,8 +1,9 @@
 export class EventModel {
 
-    key?: string;
+    key?: string | null;
     nome?: string;
     date?: string;
     dias?: number;
+    category?: { [key: string]: boolean };
 
 }

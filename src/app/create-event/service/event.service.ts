@@ -9,6 +9,8 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 })
 export class EventService {
 
+  private basePath = '/events';
+
   constructor(private db: AngularFireDatabase) { }
 
   salvar(produto: EventModel) { 
@@ -36,6 +38,29 @@ export class EventService {
           ...c.payload.val() as EventModel}));
       })
     );
+  }
+
+  // listarPorCategoria(categoryId: string | null): Observable<EventModel[]> {
+  //   return this.db.list<EventModel>('event', ref => ref.orderByChild('category').equalTo(categoryId)).snapshotChanges()
+  //     .pipe(
+  //       map(changes => {
+  //         return changes.map(c => ({ key: c.key, ...c.payload.val() as EventModel }));
+  //       })
+  //     );
+  // }
+
+  listarPorCategoria(categoryId: string | null): Observable<EventModel[]> {
+    return this.db.list<EventModel>('event', ref => ref.orderByChild('category').equalTo(categoryId)).snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.key, ...c.payload.val() as EventModel }));
+        })
+      );
+  }
+  
+
+  getEventsByCategory(categoryId: string): Observable<Event[]> {
+    return this.db.list<Event>(this.basePath, ref => ref.orderByChild(`categories/${categoryId}`).equalTo(true)).valueChanges();
   }
 
 }

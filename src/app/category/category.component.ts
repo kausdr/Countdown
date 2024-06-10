@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output  } from '@angular/core';
 import { ContentComponent } from '../content/content.component';
 import { CategoryService } from '../create-category/service/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './category.component.css'
 })
 export class CategoryComponent{
+
+  @Output() categorySelected = new EventEmitter<string>();
 
   editEnabled: boolean = false;
   public categories: any;
@@ -30,6 +32,7 @@ export class CategoryComponent{
 
     selectCategory(category: any) {
       this.selectedCategory = category;
+      this.categorySelected.emit(category.key);
     }
   
     isSelected(category: any) {
