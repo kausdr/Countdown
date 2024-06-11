@@ -32,11 +32,12 @@ export class CardComponent{
       if (this.selectedCategoryId !== null) {
         this.eventService.listarPorCategoria(this.selectedCategoryId).subscribe(events => {
           this.events = events;
+          console.log(this.selectedCategoryId)
         });
       } else {
-        // Se selectedCategoryId for null, exibir todos os eventos
         this.eventService.listar().subscribe(events => {
           this.events = events;
+          console.log(this.selectedCategoryId)
         });
       }
     }

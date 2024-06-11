@@ -40,15 +40,6 @@ export class EventService {
     );
   }
 
-  // listarPorCategoria(categoryId: string | null): Observable<EventModel[]> {
-  //   return this.db.list<EventModel>('event', ref => ref.orderByChild('category').equalTo(categoryId)).snapshotChanges()
-  //     .pipe(
-  //       map(changes => {
-  //         return changes.map(c => ({ key: c.key, ...c.payload.val() as EventModel }));
-  //       })
-  //     );
-  // }
-
   listarPorCategoria(categoryId: string | null): Observable<EventModel[]> {
     return this.db.list<EventModel>('event', ref => ref.orderByChild('category').equalTo(categoryId)).snapshotChanges()
       .pipe(

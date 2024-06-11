@@ -95,14 +95,15 @@ export class CreateEventComponent {
     
       });
 
-      this.authGuard.home();
+      
     }
+    this.authGuard.home();
   }
 
   selectCategory(event: Event) {
     const target = event.target as HTMLSelectElement;
-    const selectedCategory = target.value;
-    this.selectedCategory = this.categories.find(category => category.key === selectedCategory);
+    this.selectedCategory = target.value;
+    console.log(this.selectedCategory);
   }
 
   excluir(key: any) {
